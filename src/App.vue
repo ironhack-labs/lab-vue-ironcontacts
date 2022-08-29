@@ -1,21 +1,52 @@
-<script setup>
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Hello Vue 3 + Vite" />
+  <div id="app">
+    <h1 class="title">Iron Contacts</h1>
+    <table class ="contactstable">
+      <tr>
+        <th>Picture</th>
+        <th>Name</th>
+        <th>Popularity</th>
+      </tr>
+      <tr v-for="contact in fivecontacts" :key="contact.id">
+        <td><img class="picture" :src="contact.pictureUrl" /></td>
+        <td>
+          <p>{{ contact.name }}</p>
+        </td>
+        <td>
+          <p>{{ contact.popularity }}</p>
+        </td>
+      </tr>
+    </table>
+  </div>
 </template>
 
+
+<script>
+import contacts from "./contacts.json";
+
+export default {
+  name: "App",
+  data() {
+    let fivecontacts = contacts.slice(0, 5);
+    return {
+      fivecontacts,
+    };
+  },
+};
+</script>
+
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+
+.picture {
+  width:100px;
+}
+.contactstable {
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+}
+#app {
+  width:100%;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
 }
 </style>

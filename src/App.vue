@@ -1,11 +1,13 @@
 <template>
   <div id="app">
     <h1 class="title">Iron Contacts</h1>
-    <table class ="contactstable">
+    <table class="contactstable">
       <tr>
         <th>Picture</th>
         <th>Name</th>
         <th>Popularity</th>
+        <th>Won Oscar</th>
+        <th>Won Emmy</th>
       </tr>
       <tr v-for="contact in fivecontacts" :key="contact.id">
         <td><img class="picture" :src="contact.pictureUrl" /></td>
@@ -15,6 +17,10 @@
         <td>
           <p>{{ contact.popularity }}</p>
         </td>
+        <td v-if="contact.wonOscar">
+          <img src="./src/assets/logo.png" />
+        </td>
+        <td v-if="contact.wonEmmy"><img src="./src/assets/logo.png" /></td>
       </tr>
     </table>
   </div>
@@ -27,7 +33,7 @@ import contacts from "./contacts.json";
 export default {
   name: "App",
   data() {
-    let fivecontacts = contacts.slice(0, 5);
+    let fivecontacts = contacts.slice(5, 10);
     return {
       fivecontacts,
     };
@@ -36,15 +42,14 @@ export default {
 </script>
 
 <style>
-
 .picture {
-  width:100px;
+  width: 100px;
 }
 .contactstable {
   text-align: center;
 }
 #app {
-  width:100%;
+  width: 100%;
   display: flex;
   flex-flow: column;
   align-items: center;

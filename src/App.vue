@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Iron Contacts</h1>
-    <!-- <button @click=addRandom()>Add a Random Contact</button> -->
+    <button @click="addRandom()">Add a Random Contact</button>
     <table class="table">
       <thead>
         <td><b>Picture</b></td>
@@ -34,16 +34,16 @@ export default {
       contacts: contacts,
     }  
   },
-  // methods: {
-  //   addRandom() {
-  //     let randomContactList = contacts.splice(5, contacts.lenght-1);
-  //     this.fiveContacts.unshift(randomContactList[0]);
-  //   },
-  //   mostPopular() {
-  //     let popular = this.fiveContacts.sort((a,b) => a.popularity < b.popularity);
-  //     return popular;
-  //   },
-  // },
+  methods: {
+    addRandom() {
+      let randomContactList = contactsData.splice(5, contactsData.length-1);
+      this.contacts.unshift(randomContactList[0]);
+    },
+    // mostPopular() {
+    //   let popular = this.contacts.sort((a,b) => a.popularity < b.popularity);
+    //   return popular;
+    // },
+  },
 };
 </script>
 

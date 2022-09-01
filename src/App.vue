@@ -7,31 +7,27 @@
         <td><b>Name</b></td>
         <td><b>Popularity</b></td>
       </thead>
-      <tbody v-for="fivecontact in fivecontacts" :key="fivecontact">
-        <td><img :src="`${ fivecontact.pictureUrl }`" /></td>
-        <td> {{ fivecontact.name }} </td>
-        <td> {{ fivecontact.popularity }} </td>
+      <tbody>
+        <tr v-for="contact in contacts" :key="contact">
+          <td><img :src="`${ contact.pictureUrl }`" /></td>
+          <td> {{ contact.name }} </td>
+          <td> {{ contact.popularity }} </td>
+        </tr>
       </tbody>
     </table>
   </div>
 </template>
 
 <script>
-import contacts from "./contacts.json";
+import contactsData from "./contacts.json";
 
 export default {
   name: 'App',
   data() {
+    let contacts = contactsData.slice(0, 5);
     return {
       contacts: contacts,
-      fivecontacts: [],
     }  
-  },
-  created() {
-    let fiveContacts = contacts.slice(0, 5).push(fivecontacts);
-    return {
-      fiveContacts
-    };
   },
   // methods: {
   //   addRandom() {
@@ -58,7 +54,7 @@ export default {
 .table > thead > td {
   padding-left: 160px;
 }
-.table > tbody > td {
+.table > tbody > tr > td {
   padding-left: 150px;
 }
 img {

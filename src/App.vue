@@ -1,21 +1,38 @@
-<script setup>
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Hello Vue 3 + Vite" />
+	<h1>IronContacts</h1>
+	<ContactsGrid :contacts="contacts"></ContactsGrid>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<script>
+	import ContactsGrid from './components/ContactsGrid.vue';
+	export default {
+	name: 'App',
+	components: {
+		ContactsGrid,
+	},
+	data() {
+		return {
+			contacts: [],
+		};
+	},
+	computed: {
+
+	},
+	methods: {
+		async fetchContacts() {
+			const response = await fetch('/contacts.json');
+			const data = await response.json();
+			this.contacts = data;
+		},
+	},
+	created() {
+		this.fetchContacts();
+	}
 }
+</script>
+
+<style>
+	h1 {
+		text-align: center;
+	}
 </style>

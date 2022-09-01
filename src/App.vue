@@ -41,39 +41,21 @@ import contacts from "./contacts.json";
 export default {
   name: "App",
   data() {
-    let fivecontacts = contacts.slice(5, 10);
+    let fivecontacts = contacts.slice(0, 5);
     return {
       fivecontacts,
     };
   },
   methods: {
     addrandom() {
-      let randomcontactlist = contacts.splice(6, 5);
+      let randomcontactlist = contacts.splice(5, contacts.length);
       this.fivecontacts.unshift(randomcontactlist[0]);
     },
     mostpopular() {
-      let popular = this.fivecontacts.sort((a, b) => {
-        if (a.popularity > b.popularity) {
-          return -1;
-        } else if (a.popularity < b.popularity) {
-          return 1;
-        } else {
-          return 0;
-        }
-        return { popular };
-      });
+      this.fivecontacts.sort((a, b) => a.popularity < b.popularity);
     },
     alphabeticalorder() {
-      let orderbyname = this.fivecontacts.sort((a, b) => {
-        if (a.name < b.name) {
-          return -1;
-        } else if (a.name > b.name) {
-          return 1;
-        } else {
-          return 0;
-        }
-        return { orderbyname };
-      });
+      this.fivecontacts.sort((a, b) => a.name > b.name);
     },
     removecontact(contact) {
       this.fivecontacts = this.fivecontacts.filter((t) => t !== contact);

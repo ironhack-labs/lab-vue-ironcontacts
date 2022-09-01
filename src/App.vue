@@ -1,21 +1,34 @@
-<script setup>
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Hello Vue 3 + Vite" />
+	<div>
+		<ShowContact :contacts="getContact" />
+	</div>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<script>
+	import { computed } from "@vue/runtime-core";
+	import contactsJson from "./contacts.json";
+	import ShowContact from "./components/ShowContact.vue";
+
+	export default {
+		name: "App",
+		data() {
+			return {
+				contacts: contactsJson,
+			};
+		},
+		computed: {
+			getContact() {
+				return this.contacts.map((contact) => {
+					return {
+						name: contact.name,
+						picture: contact.pictureUrl,
+						popularity: contact.popularity.toFixed([2]),
+					};
+				});
+			},
+		},
+		components: { ShowContact },
+	};
+</script>
+
+<style></style>

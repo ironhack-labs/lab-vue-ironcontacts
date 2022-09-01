@@ -49,7 +49,6 @@ export default {
 	},
 	props: {
 		contacts: [],
-
 	},
 	computed: {
 
@@ -111,8 +110,7 @@ export default {
 	justify-content: space-between;
 	align-items: center;
 	width: 600px;
-	margin: 0 auto;
-	margin-bottom: 20px;
+	margin: 20px auto;
 }
 
 .contact-button {
@@ -153,6 +151,7 @@ export default {
 .grid-text {
 	text-align: center;
 	padding: 30px 0;
+	font-size: 14px;
 }
 
 .contact-image img {
@@ -163,5 +162,6 @@ export default {
 	margin: auto;
 	display: block;
 	margin-bottom: 20px;
+	border-radius: 5px;
 }
 </style>

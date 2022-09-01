@@ -1,17 +1,22 @@
 <template>
   <div>
     <h1>Iron Contacts</h1>
+    <!-- <button @click=addRandom()>Add a Random Contact</button> -->
     <table class="table">
       <thead>
         <td><b>Picture</b></td>
         <td><b>Name</b></td>
         <td><b>Popularity</b></td>
+        <td><b>Won an Oscar</b></td>
+        <td><b>Won an Emmy</b></td>
       </thead>
       <tbody>
         <tr v-for="contact in contacts" :key="contact">
           <td><img :src="`${ contact.pictureUrl }`" /></td>
           <td> {{ contact.name }} </td>
           <td> {{ contact.popularity }} </td>
+          <td><img v-if=" contact.wonOscar " src="../src/assets/trophy-solid-24.png" alt="trophy"></td>
+          <td><img v-if=" contact.wonEmmy " src="../src/assets/trophy-solid-24.png" alt="trophy"></td>
         </tr>
       </tbody>
     </table>
@@ -52,10 +57,13 @@ export default {
   margin-top: 60px;
 }
 .table > thead > td {
-  padding-left: 160px;
+  padding-left: 130px;
 }
+/* .table > tbody > tr {
+  width: 90%;
+} */
 .table > tbody > tr > td {
-  padding-left: 150px;
+  padding-left: 130px;
 }
 img {
   height: 185px;

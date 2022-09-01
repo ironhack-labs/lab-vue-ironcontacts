@@ -24,17 +24,17 @@ export default {
           <th>Popularity</th>
         </tr>
       </thead>
-      <tbody v-for="item in contacts" :key="item.id">
-        <td>
-          <img
-            :src="item.pictureUrl"
-            width="100px"
-            height="120px"
-            alt="contact Image"
-          />
-        </td>
-        <td>{{ item.name }}</td>
-        <td>{{ item.popularity.toFixed(2) }}</td>
+      <tbody>
+        <tr v-for="item in contacts" :key="item.id">
+          <td>
+            <img
+              :src="item.pictureUrl"              
+              alt="contact Image"
+            />
+          </td>
+          <td>{{ item.name }}</td>
+          <td>{{ item.popularity.toFixed(2) }}</td>
+        </tr>
       </tbody>
     </table>
   </div>
@@ -48,5 +48,9 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+img{
+  width:100px;
+  height:120px;
 }
 </style>

@@ -1,19 +1,17 @@
 <template>
 	<h1>IronContacts</h1>
-	<ContactsGrid :contacts="contacts"></ContactsGrid>
+	<ContactsGrid :contacts="contacts" v-if="contacts.length > 0"></ContactsGrid>
 </template>
 
 <script>
-	import ContactsGrid from './components/ContactsGrid.vue';
-	export default {
+import ContactsGrid from './components/ContactsGrid.vue';
+export default {
 	name: 'App',
 	components: {
 		ContactsGrid,
 	},
 	data() {
-		return {
-			contacts: [],
-		};
+		return { contacts: [] }
 	},
 	computed: {
 
@@ -25,14 +23,18 @@
 			this.contacts = data;
 		},
 	},
-	created() {
+	mounted() {
 		this.fetchContacts();
 	}
 }
 </script>
 
 <style>
-	h1 {
-		text-align: center;
-	}
+ * {
+	font-family: 'Lato', sans-serif;
+}
+
+h1 {
+	text-align: center;
+}
 </style>

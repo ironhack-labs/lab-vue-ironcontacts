@@ -5,11 +5,41 @@ export default {
   components: {},
   data() {
     const contacts = contactData.slice(0, 5);
+    const myArray = contacts;
+    const myArrayToShow = [];
+
     return {
       contacts: contacts,
     };
   },
   computed: {},
+  methods: {
+    getRandomInt(min, max) {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min) + min);
+    },
+    getRandomElem () {
+      if (myArray.length) {
+        const myRandomPos = getRandomInt(0, myArray.length - 1);
+        const myRandomElem = myArray[myRandomPos];
+        const elemIsAvailableToShow = myArrayToShow.findIndex(elem => elem === myRandomElem);
+
+        if (elemIsAvailableToShow === -1) {
+          myArrayToShow.push(myRandomElem);
+          const elemToRemoveIndex = myArray.findIndex(elem => elem === myRandomElem);
+          myArray.splice(elemToRemoveIndex, 1);
+        }
+      }
+},
+
+    created() {
+      const firstFivemyArray = [];
+      for (i = 0; i < 5; i++) {
+        myArrayToShow.push(myArray.unshift());
+      }
+    },   
+  },
 };
 </script>
 
@@ -33,18 +63,28 @@ export default {
           </td>
           <td>{{ item.name }}</td>
           <td>{{ item.popularity.toFixed(2) }}</td>
-          <td >
-            <img v-if="item.wonOscar" src="./assets/trophy.png" id="trophy" alt="" />
+          <td>
+            <img
+              v-if="item.wonOscar"
+              src="./assets/trophy.png"
+              id="trophy"
+              alt=""
+            />
           </td>
-          
-          <td >
-            <img v-if="item.wonEmmy" src="./assets/trophy.png" id="trophy" alt="" />
+
+          <td>
+            <img
+              v-if="item.wonEmmy"
+              src="./assets/trophy.png"
+              id="trophy"
+              alt=""
+            />
           </td>
-         
         </tr>
       </tbody>
     </table>
   </div>
+  <button @click="getRandomElem">Add Random Contact</button>
 </template>
 
 <style>
@@ -60,9 +100,8 @@ img {
   width: 100px;
   height: 120px;
 }
-#trophy{
+#trophy {
   width: 80px;
   height: 80px;
-
 }
 </style>

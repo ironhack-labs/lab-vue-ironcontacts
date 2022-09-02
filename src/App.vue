@@ -24,8 +24,10 @@ export default {
     },
     //elegimos un n º aleatorio del 5 al 1000
     getRandomInt() {
-      return Math.floor(Math.random() * 1000) + 5;
-    },
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Mathgi.floor(Math.random() * (max - min) + min);
+    }, //Esto devuelve un decimal!!!
    
     //usamos ese nº aleatorio como indice en el array para extraer un elemento
     getRandomElem() {

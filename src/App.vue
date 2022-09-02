@@ -4,47 +4,54 @@ export default {
   name: "App",
   components: {},
   data() {
-    const contacts = contactData.slice(0, 5);
-    const myArray = contacts;
+    const myArray = JSON.parse(JSON.stringify(contactData));
+    let fivecontacts = contactData.slice(0, 5);
     const myArrayToShow = [];
-
-    return {
-      contacts: contacts,
+    return {     
+      fivecontacts,
+      myArray,
+      myArrayToShow,
     };
   },
-  computed: {},
-  methods: {
-    getRandomInt(min, max) {
-      min = Math.ceil(min);
-      max = Math.floor(max);
-      return Math.floor(Math.random() * (max - min) + min);
+  // computed: {},
+  methods: { //      NOFUNCIONA
+    //creamos la primera lista con los 5 primeros elementos del array de data
+    created() {
+      const fivecontacts = [];
+      for (i = 0; i < 5; i++) {
+        myArrayToShow.push(myArray.unshift()); //en las primeras 5 iteraciones lanzadas con el metodo created añadimos 5 elementos del Data importado a 2 array: la primera que enseñaremos y la que contendra todos los elemetos que en adelante vayamos printando
+      }
     },
-    getRandomElem () {
-      if (myArray.length) {
-        const myRandomPos = getRandomInt(0, myArray.length - 1);
-        const myRandomElem = myArray[myRandomPos];
-        const elemIsAvailableToShow = myArrayToShow.findIndex(elem => elem === myRandomElem);
-
+    //elegimos un n º aleatorio del 5 al 1000
+    getRandomInt() {
+      return Math.floor(Math.random() * 1000) + 5;
+    },
+   
+    //usamos ese nº aleatorio como indice en el array para extraer un elemento
+    getRandomElem() {
+      if (this.myArray.length) {
+        const myRandomPos = getRandomInt(0, this.myArray.length - 1);
+        const myRandomElem = this.myArray[myRandomPos];
+        const elemIsAvailableToShow = myArrayToShow.findIndex(
+          (elem) => elem === myRandomElem
+        );
+        //si está disponible, lo añadimos a la lista arrayToShow
         if (elemIsAvailableToShow === -1) {
           myArrayToShow.push(myRandomElem);
-          const elemToRemoveIndex = myArray.findIndex(elem => elem === myRandomElem);
+          const elemToRemoveIndex = myArray.findIndex(
+            (elem) => elem === myRandomElem
+          );
           myArray.splice(elemToRemoveIndex, 1);
         }
       }
-},
-
-    created() {
-      const firstFivemyArray = [];
-      for (i = 0; i < 5; i++) {
-        myArrayToShow.push(myArray.unshift());
-      }
-    },   
+    },
   },
 };
 </script>
 
 <template>
   <h1>IronContacts</h1>
+  
   <div>
     <table style="width: 100%">
       <thead>
@@ -57,7 +64,7 @@ export default {
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in contacts" :key="item.id">
+        <tr v-for="item in fivecontacts" :key="item.id">
           <td>
             <img :src="item.pictureUrl" alt="contact Image" />
           </td>

@@ -20,7 +20,7 @@
           <td> {{ contact.popularity }} </td>
           <td><img v-if=" contact.wonOscar " src="../src/assets/icons8-trophy-48.png" alt="trophy"></td>
           <td><img v-if=" contact.wonEmmy " src="../src/assets/icons8-trophy-48.png" alt="trophy"></td>
-          <td><button>Delete</button></td>
+          <td><button @click="deleteElem(contact.id)">Delete</button></td>
         </tr>
       </tbody>
     </table>
@@ -68,6 +68,12 @@ export default {
     alphabetic() {
       this.fiveContacts.sort((a,b) => a.name > b.name ? 1 : -1);
     },
+    deleteElem(contactId) {
+      const contactToDelete = this.fiveContacts.findIndex(elem => elem.id === contactId);
+      if (contactToDelete !== -1) {
+        this.contacts.push(this.fiveContacts.splice(contactToDelete, 1)[0]);
+      }
+    }
   },
 };
 </script>

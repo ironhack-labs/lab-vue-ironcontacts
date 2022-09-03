@@ -3,26 +3,25 @@ import contactData from "./contacts.json";
 export default {
   name: "App",
   components: {},
-  data() {     
-      return {  
-      myArray: contactData,   
-      fivecontacts: [],     
+  data() {
+    return {
+      myArray: contactData,
+      fivecontacts: [],
     };
   },
-   //creamos la primera lista con los 5 primeros elementos del array de data
-  created() {    
+  //creamos la primera lista con los 5 primeros elementos del array de data
+  created() {
     for (let i = 0; i < 5; i++) {
       this.fivecontacts.push(this.myArray.shift()); //en las primeras 5 iteraciones lanzadas con el metodo created añadimos 5 elementos del Data importado a 2 array: la primera que enseñaremos y la que contendra todos los elemetos que en adelante vayamos printando
     }
   },
-  methods: { 
-   
+  methods: {
     //elegimos un n º aleatorio del 5 al 1000
-    getRandomInt(min,max) {
+    getRandomInt(min, max) {
       const intMin = Math.ceil(min);
       const intMax = Math.floor(max);
       return Math.floor(Math.random() * (intMax - intMin) + intMin);
-    }, 
+    },
     //usamos ese nº aleatorio como indice en el array para extraer un elemento
     getRandomElem() {
       if (this.myArray.length) {
@@ -34,23 +33,29 @@ export default {
         );
         //si está disponible, lo añadimos a la lista arrayToShow
         if (elemIsAvailableToShow === -1) {
-         this.fivecontacts.push(myRandomElem);
+          this.fivecontacts.push(myRandomElem);
           const elemToRemoveIndex = this.myArray.findIndex(
             (elem) => elem === myRandomElem
           );
           this.myArray.splice(elemToRemoveIndex, 1);
-        };
-      }      
+        }
+      }
     },
     sortByName() {
-        this.fivecontacts.sort((a,b)=> a.name > b.name ? 1 : -1);       
-      }
+      this.fivecontacts.sort((a, b) => (a.name > b.name ? 1 : -1));
+    },
+    sortByPopularity() {
+      this.fivecontacts.sort((a, b) => (a.popularity > b.popularity ? 1 : -1));
+    },
   },
 };
 </script>
 
 <template>
   <h1>IronContacts</h1>
+  <button @click="getRandomElem">Add Random Contact</button>
+  <button @click="sortByName">Sort by Name</button>
+  <button @click="sortByPopularity">Sort by Popularity</button>
 
   <div>
     <table style="width: 100%">
@@ -91,7 +96,6 @@ export default {
       </tbody>
     </table>
   </div>
-  <button @click="getRandomElem">Add Random Contact</button>
 </template>
 
 <style>
@@ -102,6 +106,10 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+button {
+  width: 30%;
+  margin: 10px;
 }
 img {
   width: 100px;

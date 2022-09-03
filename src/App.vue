@@ -16,7 +16,7 @@ export default {
     }
   },
   methods: {
-    //elegimos un n º aleatorio del 5 al 1000
+    //elegimos un n º aleatorio entre min y max
     getRandomInt(min, max) {
       const intMin = Math.ceil(min);
       const intMax = Math.floor(max);
@@ -26,17 +26,19 @@ export default {
     getRandomElem() {
       if (this.myArray.length) {
         const myRandomPos = this.getRandomInt(0, this.myArray.length - 1);
-        // console.log(myRandomPos);
+
         const myRandomElem = this.myArray[myRandomPos];
         const elemIsAvailableToShow = this.fivecontacts.findIndex(
           (elem) => elem === myRandomElem
         );
+
         //si está disponible, lo añadimos a la lista arrayToShow
         if (elemIsAvailableToShow === -1) {
           this.fivecontacts.push(myRandomElem);
           const elemToRemoveIndex = this.myArray.findIndex(
             (elem) => elem === myRandomElem
           );
+
           this.myArray.splice(elemToRemoveIndex, 1);
         }
       }
@@ -46,6 +48,14 @@ export default {
     },
     sortByPopularity() {
       this.fivecontacts.sort((a, b) => (a.popularity > b.popularity ? 1 : -1));
+    },
+    deleteContact(contactId) {
+      const elemToDeletePosition = this.fivecontacts.findIndex(
+        (elem) => elem.id === contactId
+      );
+      this.myArray.push(this.fivecontacts[elemToDeletePosition]);
+
+      this.fivecontacts.splice(elemToDeletePosition, 1);
     },
   },
 };
@@ -91,6 +101,9 @@ export default {
               id="trophy"
               alt=""
             />
+          </td>
+          <td>
+            <button @click="deleteContact(item.id)">Delete</button>
           </td>
         </tr>
       </tbody>

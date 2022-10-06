@@ -38,8 +38,8 @@ Your task is to create a contact management app for the producer using Vue.js.
 
 Clean the `App.vue` component so that it has the following structure:
 
-```
-<!-- src/App.vue -->
+```vue
+<!-- src/App.js -->
 <template>
   <div class="app">
   </div>

@@ -36,18 +36,14 @@ Your task is to create a contact management app for the producer using Vue.js.
 
 ## Getting Started
 
-Clean the `App.js` component so that it has the following structure:
+Clean the `App.vue` component so that it has the following structure:
 
-```js
-// src/App.js
-import "./App.css";
-
-function App() {
-  <template>
-  <div id="app"></div>
+```
+<!-- src/App.js -->
+<template>
+  <div class="app">
+  </div>
 </template>
-}
-export default App;
 ```
 
 ## Instructions
